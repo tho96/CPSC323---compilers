@@ -17,25 +17,25 @@ def LR_Parser(input_string, LR_table, production):
         x = LR_table[top][incoming_input]
 
         if x[0] == 'S':
-            stack.append(incoming_input)  
+            stack.append(incoming_input)
             stack.append(int(x[1:]))  # Enter the state by pushing it onto the stack
             i = i + 1
-            
-        elif x[0] == 'R': 
-            right_side = production[int(x[1:])][1]  
-            left_side = production[int(x[1:])][0] 
+
+        elif x[0] == 'R':
+            right_side = production[int(x[1:])][1]
+            left_side = production[int(x[1:])][0]
             pop_number = 2 * len(right_side)
-            
+
             for j in range(0, pop_number):
                 stack.pop()
             new_top = stack[len(stack) - 1]
             stack.append(left_side)
             stack.append(LR_table[new_top][left_side])
 
-        elif x == 'A': 
+        elif x == 'A':
             print('Input string ' + input_string + ' has been accepted')
             return 1
-        else:  
+        else:
             print('Input string: ' + input_string + ' is rejected')
             return -1
 
@@ -80,6 +80,6 @@ def main():
     LR_Parser(string1, LR_table, productions)
     print('')
     LR_Parser(string2, LR_table, productions)
-    
+
 if __name__ == '__main__':
     main()
